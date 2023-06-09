@@ -5,6 +5,9 @@ var routes = require('./routes/api')
 var app = express()
 var port = 3000
 
+// Middleware
+app.use(express.urlencoded())
+
 // Base de datos
 mongoose.connect('mongodb://127.0.0.1:27017/contactos')
     .then(() => console.log('conexión con MongoDB ok'))
