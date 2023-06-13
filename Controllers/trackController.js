@@ -1,4 +1,4 @@
-var track = require('../Models/track')
+var track = require('../Models/tracks')
 
 var trackController = {
     todos: (req, res) => {
@@ -24,14 +24,14 @@ var trackController = {
     },
     crear: (req, res) => {
         var params = req.body
-        var track = new track()
+        var track1 = new track()
 
-        track.name = params.name
-        track.album = params.album
-        track.artist = params.artist
+        track1.name = params.name
+        track1.album = params.album
+        track1.artist = params.artist
 
 
-        track.save().then((trackCreado) => {
+        track1.save().then((trackCreado) => {
             return res.status(201).send(trackCreado)
         }).catch((err) => {
             if (err) return res.status(500).send('Error al ingresar el track.')
