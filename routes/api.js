@@ -11,11 +11,11 @@ router.post('/usuarios', UsuarioController.crear)
 router.put('/usuarios/:id', UsuarioController.actualizar)
 router.delete('/usuarios/:id', auth, UsuarioController.eliminar)
 
-router.get('/', (req, res) => {
-    res.status(200).send('Prueba de que funciona el API.')
-})
-router.get('*', (req, res) => {
-    res.status(404).send('Ruta inexistente.')
-})
+// router.get('/', (req, res) => {
+//     res.status(200).send('Prueba de que funciona el API.')
+// })
+// router.get('*', (req, res) => {
+//     res.status(404).send('Ruta inexistente.')
+// })
 
 module.exports = router

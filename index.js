@@ -2,6 +2,7 @@ require('dotenv').config() // Para que funcionen las variables de entorno
 var express = require('express')
 var mongoose = require('mongoose')
 var routesApi = require('./routes/api')
+var routesTracks = require('./routes/tracks')
 var routesAuth = require('./routes/auth')
 
 var app = express()
@@ -16,7 +17,8 @@ mongoose.connect('mongodb://127.0.0.1:27017/contactos')
     .catch((err) => console.log(err))
 
 // Rutas API
-app.use('/api', routesApi) // Para cambiar la raíz del API
+app.use('/api', routesApi) // Para cambiar la raíz del API e incluir las rutas
+app.use('/api', routesTracks)
 
 // Rutas Auth
 app.use('/auth', routesAuth) // Para cambiar la raíz del Auth
