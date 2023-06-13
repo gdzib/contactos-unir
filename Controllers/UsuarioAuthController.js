@@ -17,11 +17,7 @@ var UsuarioAuthController = {
 
             var usuario = await UsuarioAuth.create({email: email, password: hashedPassword})
 
-            var token = jwt.sign(
-                {id_usuario: usuario._id, email},
-                process.env.TOKEN_KEY,
-                {expiresIn: '2h'},
-            )
+            var token = signToken(usuario._id, usuario.email)
 
             usuario.token = token
 
@@ -37,11 +33,7 @@ var UsuarioAuthController = {
 
             var usuario = await UsuarioAuth.findOne({email: email})
             if (usuario && (await bcrypt.compare(password, usuario.password))) {
-                var token = jwt.sign(
-                    {id_usuario: usuario._id, email},
-                    process.env.TOKEN_KEY,
-                    {expiresIn: '2h'},
-                )
+                var token = signToken(usuario._id, usuario.email)
 
                 usuario.token = token
 
@@ -54,6 +46,15 @@ var UsuarioAuthController = {
             return res.status(500).send('Error al loguear al usuario.')
         }
     },
+}
+
+var signToken = (_id, email) => {
+    var token = jwt.sign(
+        {_id, email},
+        process.env.TOKEN_KEY,
+        {expiresIn: '30m'},
+    )
+    return token
 }
 
 module.exports = UsuarioAuthController
