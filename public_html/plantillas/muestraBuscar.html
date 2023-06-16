@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.7.0.min.js" integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" crossorigin="anonymous"></script>
+
+    <!--<script src="js/repositorio.js"></script>-->
+</head>
+<body>
+
+    <div class="container">
+        
+        <div class="row justify-content-center mt-5">
+            <div class="col text-center"><h1>{{ titulo }}</h1></div>
+        </div>
+
+        <div class="row justify-content-center mt-5">
+
+            <div class="col-4 text-end mb-4"><strong>id</strong></div>
+            <div class="col-6 text-start mb-4">{{ usuario._id.toString() }}</div>
+
+            <div class="col-4 text-end mb-4"><strong>Nombre:</strong></div>
+            <div class="col-6 text-start mb-4">{{ usuario.nombre }}</div>
+
+            <div class="col-4 text-end mb-4"><strong>Apellido:</strong></div>
+            <div class="col-6 text-start mb-4">{{ usuario.apellido }}</div>
+
+            <div class="col-4 text-end mb-4"><strong>Teléfono:</strong></div>
+            <div class="col-6 text-start mb-4">{{ usuario.telefono }}</div>
+
+            <div class="col-4 text-end mb-4"><strong>Correo:</strong></div>
+            <div class="col-6 text-start mb-4">{{ usuario.email }}</div>
+
+            <div class="col-4 text-end mb-4"><strong>Edad:</strong></div>
+            <div class="col-6 text-start mb-4">{{ usuario.edad }}</div>
+
+        </div>
+
+        <div class="row justify-content-center mt-4">
+            <div class="col-4 text-center">
+                <button class="btn btn-success mx-2" data-bs-toggle="modal" data-bs-target="#modalModificarUsuario">Modificar Usuario</button>
+                <button class="btn btn-danger mx-2"  data-bs-toggle="modal" data-bs-target="#modalEliminarUsuario">Eliminar</button>
+            </div>
+        </div>
+        
+    </div>  <!--    FIN del container   -->
+
+    <!--    MODAL MODIFICAR USUARIO   -->
+    <div class="modal fade" id="modalModificarUsuario" tabindex="-1" aria-labelledby="modificarUsuarioModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="modificarUsuarioModalLabel">Modificar Usuario</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+
+                <div class="row justify-content-center">
+                    <div class="col text-center" id="respuestaModalA"></div>  
+                </div>
+
+                <form class="row g-3 needs-validation" novalidate>
+                    <div class="col-md-4">
+                        <label for="inputNombre" class="form-label">Nombre</label>
+                        <input type="text" class="form-control" id="inputNombre" value="{{ usuario.nombre }}" required>
+                    </div>
+                    <div class="col-md-4">
+                        <label for="inputApellido" class="form-label">Apellido</label>
+                        <input type="text" class="form-control" id="inputApellido" value="{{ usuario.apellido }}" required>
+                    </div>
+                    <div class="col-md-4">
+                        <label for="inputTelefono" class="form-label">Teléfono</label>
+                        <input type="text" class="form-control" id="inputTelefono" value="{{ usuario.telefono }}" required>
+                    </div>
+                    <div class="col-md-4">
+                        <label for="inputEmail" class="form-label">Coreo Electrónico</label>
+                        <input type="text" class="form-control" id="inputCorreo" value="{{ usuario.email }}" required>
+                    </div>
+                    <div class="col-md-4">
+                        <label for="inputEdad" class="form-label">Edad</label>
+                        <input type="number" class="form-control" id="inputEdad" value="{{ usuario.edad }}" required>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                <button type="button" id="btnModificarUsuario" onClick="modificarUsuario(`{{ usuario._id.toString() }}`);" class="btn btn-success">Modificar Usuario</button>
+            </div>
+            </div>
+        </div>
+    </div>
+    <!--    FIN DEL MODAL MODIFICAR USUARIO   -->
+
+    <!--    MODAL BUSCAR USUARIO   -->
+    <div class="modal fade" id="modalEliminarUsuario" tabindex="-1" aria-labelledby="modificarUsuarioModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="modificarUsuarioModalLabel">Eliminar Usuario</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+
+                <div class="row justify-content-center">
+                    <div class="col text-center" id="respuestaModalE"></div>  
+                </div>
+                <div class="row justify-content-center">
+                    <div class="col text-center">
+                        <h3>¿Esta seguro que desea eliminar el registro?</h3>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                <button type="button" id="btnEliminarUsuario" onClick="eliminarUsuario(`{{ usuario._id.toString() }}`);" class="btn btn-danger">Eliminar Usuario</button>
+            </div>
+            </div>
+        </div>
+    </div>
+    <!--    FIN DEL MODAL MODIFICAR USUARIO   -->
+
+</body>
+</html>

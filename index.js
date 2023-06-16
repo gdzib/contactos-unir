@@ -4,12 +4,16 @@ var mongoose = require('mongoose')
 var routesApi = require('./routes/api')
 var routesTracks = require('./routes/tracks')
 var routesAuth = require('./routes/auth')
+var routesVista = require('./routes/vista')
 
 var app = express()
 var port = 3000
 
 // Middleware
 app.use(express.urlencoded())
+
+//  Ruta Estática
+app.use(express.static("public_html"));
 
 // Base de datos
 mongoose.connect('mongodb://127.0.0.1:27017/contactos')
@@ -24,9 +28,13 @@ app.use('/api', routesTracks)
 app.use('/auth', routesAuth) // Para cambiar la raíz del Auth
 
 // Rutas front
+app.use('/',routesVista)
+/*
 app.get('/', (req, res) => {
     res.status(200).send('Prueba de que funciona el front.')
 })
+*/
+
 app.get('*', (req, res) => {
     res.status(404).send('Página inexistente.')
 })
