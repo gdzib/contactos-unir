@@ -53,6 +53,7 @@ var vistaController = {
         var id = req.params.id
         var params = req.body
 
+
         //console.log(id,params);
 
         Usuario.findByIdAndUpdate(id, params, {new: true}).then((usuarioActualizado) => {
