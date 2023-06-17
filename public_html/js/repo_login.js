@@ -22,6 +22,7 @@ $(document).ready(function(){
         }).done(function(data) {
             
             console.log('SUCCESS');
+            console.log(data.token);
 
             /*
             var msj = ` <div class="alert alert-success" role="alert">

@@ -1,6 +1,7 @@
 var Usuario = require('../Models/Usuario')
 var swig = require("swig")
 
+
 var vistaController = {
     todos: (req, res) => {
         Usuario.find().then((usuariosBuscados) => {
