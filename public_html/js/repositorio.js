@@ -61,7 +61,7 @@ $(document).ready(function(){
 
     function eliminarUsuario(id){
 
-        alert("entro");
+        //alert("entro");
 
         var url = "/usuarios/" + id;
         //var parametros ={
